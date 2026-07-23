@@ -64,31 +64,25 @@ async def download_instagram(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
 
 async def main():
-
     from telegram.request import HTTPXRequest
 
-request = HTTPXRequest(
-    connect_timeout=60,
-    read_timeout=60,
-    write_timeout=60,
-    pool_timeout=60
-)
-
-    app = Application.builder().token(
-    TOKEN
-).request(request).build()
-
-    app.add_handler(
-        CommandHandler("start", start)
+    request = HTTPXRequest(
+        connect_timeout=60,
+        read_timeout=60,
+        write_timeout=60,
+        pool_timeout=60
     )
 
-    app.add_handler(
-        MessageHandler(filters.TEXT, download_instagram)
-    )
+    app = Application.builder().token(TOKEN).request(request).build()
+
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(MessageHandler(filters.TEXT, download_instagram))
 
     await app.initialize()
     await app.start()
     await app.updater.start_polling()
+
+    print("Bot Started")
 
     await app.updater.idle()
 
