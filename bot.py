@@ -74,7 +74,7 @@ request = HTTPXRequest(
     pool_timeout=60
 )
 
-app = Application.builder().token(
+    app = Application.builder().token(
     TOKEN
 ).request(request).build()
 
