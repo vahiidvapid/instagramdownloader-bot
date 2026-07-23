@@ -65,7 +65,18 @@ async def download_instagram(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
 async def main():
 
-    app = Application.builder().token(TOKEN).build()
+    from telegram.request import HTTPXRequest
+
+request = HTTPXRequest(
+    connect_timeout=60,
+    read_timeout=60,
+    write_timeout=60,
+    pool_timeout=60
+)
+
+app = Application.builder().token(
+    TOKEN
+).request(request).build()
 
     app.add_handler(
         CommandHandler("start", start)
