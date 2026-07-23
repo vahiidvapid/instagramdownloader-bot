@@ -84,8 +84,9 @@ async def main():
 
     print("Bot Started")
 
-    await app.updater.idle()
-
+    import asyncio
+    while True:
+    await asyncio.sleep(3600)
 
 if __name__ == "__main__":
     import asyncio
