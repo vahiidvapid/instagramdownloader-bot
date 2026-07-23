@@ -46,15 +46,17 @@ async def download_instagram(update: Update, context: ContextTypes.DEFAULT_TYPE)
         ]
 
         result = subprocess.run(
-        command,
-        capture_output=True,
-        text=True
+    command,
+    capture_output=True,
+    text=True
+    
     )
 
 if result.returncode != 0:
     await update.message.reply_text(
-        f"❌ yt-dlp error:\n{result.stderr}"
+        "❌ خطای دانلود:\n" + result.stderr[:4000]
     )
+    
     return
 
         await update.message.reply_video(
