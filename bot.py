@@ -62,7 +62,6 @@ async def download_instagram(update: Update, context: ContextTypes.DEFAULT_TYPE)
             f"❌ خطا:\n{e}"
         )
 
-
 async def main():
     from telegram.request import HTTPXRequest
 
@@ -84,9 +83,10 @@ async def main():
 
     print("Bot Started")
 
-    import asyncio
     while True:
-    await asyncio.sleep(3600)
+        import asyncio
+        await asyncio.sleep(3600)
+
 
 if __name__ == "__main__":
     import asyncio
