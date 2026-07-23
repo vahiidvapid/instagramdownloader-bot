@@ -63,26 +63,25 @@ async def download_instagram(update: Update, context: ContextTypes.DEFAULT_TYPE)
         )
 
 
-def main():
+async def main():
 
     app = Application.builder().token(TOKEN).build()
 
     app.add_handler(
-        CommandHandler(
-            "start",
-            start
-        )
+        CommandHandler("start", start)
     )
 
     app.add_handler(
-        MessageHandler(
-            filters.TEXT,
-            download_instagram
-        )
+        MessageHandler(filters.TEXT, download_instagram)
     )
 
-    app.run_polling()
+    await app.initialize()
+    await app.start()
+    await app.updater.start_polling()
+
+    await app.updater.idle()
 
 
 if __name__ == "__main__":
-    main()
+    import asyncio
+    asyncio.run(main())
