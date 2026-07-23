@@ -45,10 +45,17 @@ async def download_instagram(update: Update, context: ContextTypes.DEFAULT_TYPE)
             url
         ]
 
-        subprocess.run(
-            command,
-            check=True
-        )
+        result = subprocess.run(
+        command,
+        capture_output=True,
+        text=True
+    )
+
+if result.returncode != 0:
+    await update.message.reply_text(
+        f"❌ yt-dlp error:\n{result.stderr}"
+    )
+    return
 
         await update.message.reply_video(
             video=open(filename, "rb"),
