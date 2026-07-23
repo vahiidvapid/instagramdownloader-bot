@@ -33,7 +33,7 @@ async def download_instagram(update: Update, context: ContextTypes.DEFAULT_TYPE)
         "⏳ در حال دانلود..."
     )
 
-    try:
+        try:
         filename = "instagram_video.mp4"
 
         command = [
@@ -46,18 +46,16 @@ async def download_instagram(update: Update, context: ContextTypes.DEFAULT_TYPE)
         ]
 
         result = subprocess.run(
-    command,
-    capture_output=True,
-    text=True
-    
-    )
+            command,
+            capture_output=True,
+            text=True
+        )
 
-if result.returncode != 0:
-    await update.message.reply_text(
-        "❌ خطای دانلود:\n" + result.stderr[:4000]
-    )
-    
-    return
+        if result.returncode != 0:
+            await update.message.reply_text(
+                "❌ خطای دانلود:\n" + result.stderr[:4000]
+            )
+            return
 
         await update.message.reply_video(
             video=open(filename, "rb"),
@@ -65,6 +63,11 @@ if result.returncode != 0:
         )
 
         os.remove(filename)
+
+    except Exception as e:
+        await update.message.reply_text(
+            f"❌ خطا:\n{e}"
+        )
 
     except Exception as e:
         await update.message.reply_text(
