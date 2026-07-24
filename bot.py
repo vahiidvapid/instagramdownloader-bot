@@ -32,7 +32,7 @@ async def download_instagram(update: Update, context: ContextTypes.DEFAULT_TYPE)
     await update.message.reply_text(
         "⏳ در حال دانلود..."
     )
- try:
+    try:
         filename = "instagram_video.mp4"
 
         command = [
